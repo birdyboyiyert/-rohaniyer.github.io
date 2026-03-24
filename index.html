@@ -3,442 +3,305 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rohan Iyer</title>
+  <title>Rohan.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 
   <style>
-    /* =============================================
-       THEME — edit colors here
-    ============================================= */
-    :root {
-      --bg:       #f9f7f4;
-      --text:     #1a1a1a;
-      --muted:    #888;
-      --accent:   #2d6a4f;   /* change this to any color you like */
-      --border:   #e2ddd8;
-      --card-bg:  #ffffff;
-    }
-
-    /* =============================================
-       RESET & BASE
-    ============================================= */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: #fff;
+      color: #111;
       font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
+      font-size: 14px;
+      font-weight: 300;
       -webkit-font-smoothing: antialiased;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    /* =============================================
-       LAYOUT
-    ============================================= */
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 0 24px;
+      opacity: 0;
+      animation: bodyFade 0.5s ease 0.1s forwards;
     }
 
-    /* =============================================
-       HEADER / NAV
-    ============================================= */
-    header {
-      padding: 40px 0 0;
+    @keyframes bodyFade {
+      to { opacity: 1; }
     }
+
+    a { color: inherit; text-decoration: underline; }
+    a:hover { opacity: 0.6; }
+
+    /* ── NAV ── */
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 28px 32px;
+      opacity: 0;
+      animation: slideDown 0.5s ease 0.2s forwards;
     }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
     .nav-name {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.15rem;
-      letter-spacing: -0.01em;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      cursor: default;
     }
+    /* typing cursor on name */
+    .nav-name::after {
+      content: '|';
+      opacity: 1;
+      animation: blink 1s step-end infinite;
+      margin-left: 1px;
+      font-weight: 300;
+      color: #bbb;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
     .nav-links {
       display: flex;
-      gap: 28px;
+      align-items: center;
+      gap: 20px;
       list-style: none;
     }
     .nav-links a {
-      font-size: 0.875rem;
-      color: var(--muted);
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    /* =============================================
-       HERO
-    ============================================= */
-    .hero {
-      padding: 80px 0 64px;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero-eyebrow {
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-bio {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.75;
-    }
-    .hero-bio strong { color: var(--text); font-weight: 500; }
-
-    /* =============================================
-       SECTION SHARED
-    ============================================= */
-    section { padding: 56px 0; border-bottom: 1px solid var(--border); }
-    section:last-of-type { border-bottom: none; }
-    .section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 500;
-      margin-bottom: 32px;
-    }
-
-    /* =============================================
-       PROJECTS
-       To add a project: copy one <article class="project"> block
-    ============================================= */
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    .project {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px 32px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .project:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.06);
-    }
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    .project-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      letter-spacing: -0.01em;
-    }
-    .project-year {
-      font-size: 0.8rem;
-      color: var(--muted);
-      white-space: nowrap;
-      padding-top: 3px;
-    }
-    .project-desc {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 16px;
-      line-height: 1.7;
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .tag {
-      font-size: 0.75rem;
-      padding: 4px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--muted);
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      color: #111;
       letter-spacing: 0.02em;
+      transition: opacity 0.2s;
     }
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--accent);
-      margin-top: 14px;
-      font-weight: 500;
-      transition: gap 0.2s;
-    }
-    .project-link:hover { gap: 10px; }
+    .nav-links a:hover { opacity: 0.5; }
 
-    /* =============================================
-       INTERESTS / ABOUT BLURBS
-    ============================================= */
-    .interests-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media (max-width: 480px) {
-      .interests-grid { grid-template-columns: 1fr; }
-      nav { flex-direction: column; gap: 16px; }
-    }
-    .interest-item {
-      padding: 20px 22px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-    .interest-emoji { font-size: 1.4rem; margin-bottom: 8px; }
-    .interest-title {
-      font-weight: 500;
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-    }
-    .interest-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
-
-    /* =============================================
-       CONTACT
-    ============================================= */
-    .contact-intro {
-      font-size: 1rem;
-      color: var(--muted);
-      margin-bottom: 28px;
-      line-height: 1.75;
-    }
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .contact-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 11px 22px;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .contact-btn:hover { background: var(--border); }
-    .contact-btn.primary {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
-    }
-    .contact-btn.primary:hover { opacity: 0.88; background: var(--accent); }
-
-    /* =============================================
-       FOOTER
-    ============================================= */
-    footer {
-      padding: 32px 0 48px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* =============================================
-       FADE-IN ANIMATION
-    ============================================= */
-    .fade-in {
+    /* ── ABOUT SECTION ── */
+    .about {
+      padding: 12px 32px 40px;
       opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.55s ease forwards;
+      animation: fadeUp 0.55s ease 0.45s forwards;
     }
     @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .hero        { animation-delay: 0.05s; }
-    section:nth-of-type(1) .fade-in { animation-delay: 0.1s; }
-    section:nth-of-type(2) .fade-in { animation-delay: 0.15s; }
-    section:nth-of-type(3) .fade-in { animation-delay: 0.2s; }
+
+    /* ✏️ EDIT: about text is inside this block */
+    .about-text {
+      font-size: 14px;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.75;
+      max-width: 580px;
+    }
+    .about-text strong { color: #111; font-weight: 400; }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      padding: 8px 32px 80px;
+      width: 100%;
+    }
+
+    .timeline-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      padding: 9px 0;
+      border-top: 1px solid #e8e8e8;
+      align-items: baseline;
+      /* scroll fade-in — toggled by JS */
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .timeline-row.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .timeline-row:last-child { border-bottom: 1px solid #e8e8e8; }
+
+    .date {
+      font-size: 13px;
+      color: #999;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      padding-right: 16px;
+      white-space: nowrap;
+    }
+    .entry {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.5;
+      color: #111;
+    }
+    .entry a {
+      color: #111;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px 32px;
+      font-size: 13px;
+      color: #999;
+      font-weight: 300;
+    }
+    footer a { color: #999; }
+
+    /* ── SMOOTH HOVER on rows ── */
+    .timeline-row:hover .entry { color: #555; }
+    .timeline-row:hover .date  { color: #bbb; }
+    .timeline-row { transition: opacity 0.4s ease, transform 0.4s ease; }
+    .timeline-row .date,
+    .timeline-row .entry { transition: color 0.2s; }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- ══════════════════════════════
+       NAV
+       ✏️ Update href links with your real profiles.
+       Add more: <li><a href="..." target="_blank">XX</a></li>
+  ═══════════════════════════════ -->
+  <nav>
+    <span class="nav-name" id="typed-name"></span>
+    <ul class="nav-links">
+      <li><a href="https://x.com/yourusername" target="_blank">X</a></li>
+      <li><a href="https://instagram.com/yourusername" target="_blank">IG</a></li>
+      <li><a href="https://github.com/yourusername" target="_blank">GH</a></li>
+      <li><a href="https://youtube.com/@yourusername" target="_blank">YT</a></li>
+    </ul>
+  </nav>
 
-    <!-- ── NAV ── -->
-    <header>
-      <nav>
-        <span class="nav-name">Rohan Iyer</span>
-        <ul class="nav-links">
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+  <!-- ══════════════════════════════
+       ABOUT
+       ✏️ Edit the paragraph below — keep it short, 2–4 sentences.
+       Use <strong>word</strong> to bold anything.
+  ═══════════════════════════════ -->
+  <div class="about">
+    <p class="about-text">
+      I'm <strong>Rohan Iyer</strong>, a <strong>15-year-old</strong> builder from California.
+      I'm into <strong>coding, tech, and making things from scratch</strong>.
+      This is my log — everything I'm working on, learning, and doing.
+      <!-- ✏️ Edit this to sound like you -->
+    </p>
+  </div>
 
-    <!-- ── HERO ── -->
-    <div class="hero fade-in">
-      <p class="hero-eyebrow">Portfolio</p>
-      <!-- ✏️ EDIT: Change the headline below -->
-      <h1>Hi, I'm Rohan.<br>I build <em>cool things.</em></h1>
-      <!-- ✏️ EDIT: Update your bio below -->
-      <p class="hero-bio">
-        I'm a <strong>15-year-old</strong> passionate about technology, design, and making ideas real.
-        Currently exploring <strong>web development, AI, and creative coding</strong> — always working on something new.
-      </p>
+  <!-- ══════════════════════════════
+       TIMELINE
+       ✏️ HOW TO ADD A NEW ENTRY:
+       Copy this block and paste it right below the "ADD NEW ENTRIES HERE" comment:
+
+         <div class="timeline-row">
+           <span class="date">MM.DD.YY</span>
+           <span class="entry">What you did</span>
+         </div>
+
+       With a link:
+         <span class="entry">Built <a href="https://..." target="_blank">Project</a></span>
+
+       Always newest at the TOP.
+  ═══════════════════════════════ -->
+  <div class="timeline">
+
+    <div class="timeline-row">
+      <span class="date" id="today-date"></span>
+      <span class="entry"></span>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         PROJECTS SECTION
-         ✏️ HOW TO ADD A PROJECT:
-         Copy one <article class="project"> block below,
-         paste it inside .projects-list, and fill in your details.
-    ══════════════════════════════════════════ -->
-    <section id="projects">
-      <p class="section-label">Projects</p>
-      <div class="projects-list fade-in">
+    <!-- ✏️ ADD NEW ENTRIES HERE ↓ -->
 
-        <!-- PROJECT 1 -->
-        <article class="project">
-          <div class="project-header">
-            <h2 class="project-title">Project Name Here</h2>  <!-- ✏️ -->
-            <span class="project-year">2025</span>             <!-- ✏️ -->
-          </div>
-          <p class="project-desc">
-            A short description of what this project does and why you built it. Keep it to 1–2 sentences.
-            <!-- ✏️ -->
-          </p>
-          <div class="project-tags">
-            <span class="tag">Python</span>   <!-- ✏️ add/remove tags -->
-            <span class="tag">HTML</span>
-            <span class="tag">CSS</span>
-          </div>
-          <!-- ✏️ Remove the link below if you don't have one -->
-          <a class="project-link" href="#" target="_blank">View project →</a>
-        </article>
+    <div class="timeline-row">
+      <span class="date">03.23.26</span>
+      <span class="entry">Launches personal portfolio website</span>
+    </div>
 
-        <!-- PROJECT 2 -->
-        <article class="project">
-          <div class="project-header">
-            <h2 class="project-title">Another Project</h2>    <!-- ✏️ -->
-            <span class="project-year">2024</span>             <!-- ✏️ -->
-          </div>
-          <p class="project-desc">
-            Describe this project here. What problem does it solve? What did you learn?
-            <!-- ✏️ -->
-          </p>
-          <div class="project-tags">
-            <span class="tag">JavaScript</span>  <!-- ✏️ -->
-            <span class="tag">React</span>
-          </div>
-          <a class="project-link" href="#" target="_blank">View project →</a>
-        </article>
+    <div class="timeline-row">
+      <span class="date">MM.DD.YY</span>
+      <span class="entry">Your achievement or milestone here</span>
+    </div>
 
-        <!-- ✏️ PASTE ANOTHER PROJECT BLOCK HERE WHEN READY -->
+    <div class="timeline-row">
+      <span class="date">MM.DD.YY</span>
+      <span class="entry">Another thing you did — school, code, life</span>
+    </div>
 
-      </div>
-    </section>
+    <div class="timeline-row">
+      <span class="date">MM.DD.YY</span>
+      <span class="entry">Built <a href="#" target="_blank">something cool</a></span>
+    </div>
 
-    <!-- ══════════════════════════════════════════
-         ABOUT / INTERESTS SECTION
-         ✏️ HOW TO ADD AN INTEREST:
-         Copy one <div class="interest-item"> block and update the emoji, title, and desc.
-    ══════════════════════════════════════════ -->
-    <section id="about">
-      <p class="section-label">About me</p>
-      <div class="fade-in">
-        <!-- ✏️ EDIT: A couple sentences about yourself -->
-        <p style="color:var(--muted); font-size:1rem; line-height:1.8; margin-bottom:28px;">
-          I'm a freshman in high school who loves building things from scratch.
-          When I'm not coding, you'll find me gaming, listening to music, or coming up with random app ideas at 2am.
-        </p>
-        <div class="interests-grid">
+    <!-- ✏️ Keep adding rows above this line -->
 
-          <!-- INTEREST 1 -->
-          <div class="interest-item">
-            <div class="interest-emoji">💻</div>       <!-- ✏️ -->
-            <div class="interest-title">Coding</div>   <!-- ✏️ -->
-            <div class="interest-desc">Building websites and experimenting with new frameworks.</div> <!-- ✏️ -->
-          </div>
+  </div>
 
-          <!-- INTEREST 2 -->
-          <div class="interest-item">
-            <div class="interest-emoji">🎮</div>
-            <div class="interest-title">Gaming</div>
-            <div class="interest-desc">Competitive games and anything with a great story.</div>
-          </div>
+  <!-- ── FOOTER ── -->
+  <footer>
+    <span>© 2026 <a href="#">Rohan Iyer</a></span>
+    <span id="clock"></span>
+  </footer>
 
-          <!-- INTEREST 3 -->
-          <div class="interest-item">
-            <div class="interest-emoji">🎵</div>
-            <div class="interest-title">Music</div>
-            <div class="interest-desc">Always got headphones on — mostly hip-hop and indie.</div>
-          </div>
+  <script>
+    // ── TYPING ANIMATION on name ──
+    const nameEl = document.getElementById('typed-name');
+    const fullName = 'Rohan.'; // ✏️ change if you want
+    let i = 0;
+    function type() {
+      if (i <= fullName.length) {
+        nameEl.textContent = fullName.slice(0, i);
+        i++;
+        setTimeout(type, i === 1 ? 500 : 90); // small delay before starting
+      }
+    }
+    type();
 
-          <!-- INTEREST 4 -->
-          <div class="interest-item">
-            <div class="interest-emoji">🤖</div>
-            <div class="interest-title">AI & Tech</div>
-            <div class="interest-desc">Fascinated by where machine learning is heading.</div>
-          </div>
+    // ── TODAY'S DATE ──
+    const todayEl = document.getElementById('today-date');
+    const now = new Date();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const yy = String(now.getFullYear()).slice(2);
+    todayEl.textContent = `${mm}.${dd}.${yy}`;
 
-          <!-- ✏️ PASTE ANOTHER INTEREST BLOCK HERE WHEN READY -->
+    // ── LIVE CLOCK ── ✏️ change "Rohan" to your name or city
+    const clockEl = document.getElementById('clock');
+    function updateClock() {
+      const d = new Date();
+      const h = String(d.getHours()).padStart(2, '0');
+      const m = String(d.getMinutes()).padStart(2, '0');
+      clockEl.textContent = `Rohan Time: ${h}:${m}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
 
-        </div>
-      </div>
-    </section>
+    // ── SCROLL FADE-IN on timeline rows ──
+    const rows = document.querySelectorAll('.timeline-row');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
 
-    <!-- ══════════════════════════════════════════
-         CONTACT SECTION
-         ✏️ Update the href links below with your actual profiles/email.
-    ══════════════════════════════════════════ -->
-    <section id="contact">
-      <p class="section-label">Contact</p>
-      <div class="fade-in">
-        <p class="contact-intro">
-          I'm always open to chatting about projects, ideas, or collaborations. Feel free to reach out!
-          <!-- ✏️ -->
-        </p>
-        <div class="contact-links">
-          <a class="contact-btn primary" href="mailto:you@email.com">  <!-- ✏️ your email -->
-            ✉️ Email me
-          </a>
-          <a class="contact-btn" href="https://github.com/yourusername" target="_blank">  <!-- ✏️ -->
-            GitHub
-          </a>
-          <a class="contact-btn" href="https://linkedin.com/in/yourusername" target="_blank">  <!-- ✏️ -->
-            LinkedIn
-          </a>
-          <!-- ✏️ Add more buttons by copying a <a class="contact-btn"> above -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ── FOOTER ── -->
-    <footer>
-      <!-- ✏️ Update year each January -->
-      © 2025 Rohan Iyer · Built by me
-    </footer>
-
-  </div><!-- /container -->
+    // stagger the first few rows on load
+    rows.forEach((row, idx) => {
+      if (idx < 6) {
+        setTimeout(() => row.classList.add('visible'), 600 + idx * 80);
+      } else {
+        observer.observe(row);
+      }
+    });
+  </script>
 
 </body>
 </html>
